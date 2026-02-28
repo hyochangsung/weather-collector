@@ -8,3 +8,6 @@ venv/
 
 # VS Code 설정
 .vscode/
+
+# 데이터 파일
+data/
