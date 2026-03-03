@@ -12,7 +12,7 @@ weather-collector/
 │
 ├── src/
 │   ├── __init__.py   # 이 폴더를 파이썬 패키지로 인식하도록 설정
-│   ├── fetcher.py    # 날씨 API 데이터 수집 모듈
+│   ├── fetcher.py    # 날씨 API 데이터 수집 모듈 ✅
 │   ├── parser.py     # 수집한 데이터 파싱 처리 모듈
 │   └── saver.py      # 데이터 저장 모듈
 │
@@ -35,8 +35,18 @@ weather-collector/
 
 ## 데이터 소스
 
-- **기상청 API허브** - 단기예보자료 조회 API
-- 제공 데이터: 기온(TA), 강수확률(ST), 하늘상태(SKY), 예보(WF), 강수유무(PREP)
+- **기상청 API허브** - 육상예보조회 API
+- API 주소: `https://apihub.kma.go.kr/api/typ02/openApi/VilageFcstMsgService/getLandFcst`
+- 제공 데이터:
+
+| 변수명 | 의미 |
+|--------|------|
+| ta | 예상기온(°C) |
+| rnSt | 강수확률(%) |
+| wf | 날씨 |
+| wfCd | 날씨코드(하늘상태) |
+| wd1 | 풍향 |
+| rnYn | 강수형태 |
 
 ---
 
@@ -60,11 +70,22 @@ pip install -r requirements.txt
 프로젝트 루트에 `.env` 파일 생성 후 아래 내용 작성:
 
 ```
-BASE_URL=https://apihub.kma.go.kr
+BASE_URL=https://apihub.kma.go.kr/api/typ02/openApi/VilageFcstMsgService/getLandFcst
 API_KEY=발급받은_API_키
 ```
 
 > 기상청 API 키는 https://apihub.kma.go.kr 에서 발급받을 수 있습니다.
+
+---
+
+## 지원 도시
+
+| 도시 | 지역코드 |
+|------|------|
+| 서울 | 11B10101 |
+| 인천 | 11B20201 |
+
+> 추후 도시 추가 예정
 
 ---
 
@@ -73,7 +94,7 @@ API_KEY=발급받은_API_키
 - [x] 프로젝트 구조 설계 (모듈화)
 - [x] 기상청 API 키 발급
 - [x] 환경변수(.env) 설정
-- [ ] fetcher.py 구현
+- [x] fetcher.py 구현 - 기상청 API 데이터 수집
 - [ ] parser.py 구현
 - [ ] saver.py 구현
 - [ ] main.py 연결
