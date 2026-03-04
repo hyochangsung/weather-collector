@@ -22,4 +22,3 @@ def parse_weather(data: dict):
         })
 
     return result
-c
