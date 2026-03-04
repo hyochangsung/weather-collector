@@ -2,6 +2,7 @@ import requests
 import os
 import logging
 from dotenv import load_dotenv
+import json
 
 load_dotenv()
 
@@ -44,4 +45,4 @@ def fetch_weather(city: str):
 
 if __name__ == "__main__":
     result = fetch_weather("서울")
-    print(result)
+    print(json.dumps(result, ensure_ascii=False, indent=2))
