@@ -13,7 +13,7 @@ weather-collector/
 ├── src/
 │   ├── __init__.py   # 이 폴더를 파이썬 패키지로 인식하도록 설정
 │   ├── fetcher.py    # 날씨 API 데이터 수집 모듈 ✅
-│   ├── parser.py     # 수집한 데이터 파싱 처리 모듈
+│   ├── parser.py     # 수집한 데이터 파싱 처리 모듈 ✅
 │   └── saver.py      # 데이터 저장 모듈
 │
 ├── data/             # 수집된 데이터 저장 폴더 (GitHub 업로드 제외)
@@ -95,7 +95,8 @@ API_KEY=발급받은_API_키
 - [x] 기상청 API 키 발급
 - [x] 환경변수(.env) 설정
 - [x] fetcher.py 구현 - 기상청 API 데이터 수집
-- [ ] parser.py 구현
+- [x] parser.py 구현 - API 응답 데이터 파싱
+- [ ] parser.py 테스트 코드 작성 (pytest)
 - [ ] saver.py 구현
 - [ ] main.py 연결
 - [ ] DB 연동 (예정)
