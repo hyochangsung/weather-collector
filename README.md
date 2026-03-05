@@ -11,14 +11,18 @@
 weather-collector/
 │
 ├── src/
-│   ├── __init__.py   # 이 폴더를 파이썬 패키지로 인식하도록 설정
+│   ├── __init__.py
 │   ├── fetcher.py    # 날씨 API 데이터 수집 모듈 ✅
 │   ├── parser.py     # 수집한 데이터 파싱 처리 모듈 ✅
-│   └── saver.py      # 데이터 저장 모듈
+│   └── saver.py      # 데이터 저장 모듈 ✅
+│
+├── tests/
+│   ├── __init__.py
+│   └── test_parser.py  # parser.py 테스트 코드 ✅
 │
 ├── data/             # 수집된 데이터 저장 폴더 (GitHub 업로드 제외)
 ├── .env              # API 키 등 환경변수 저장 (GitHub 업로드 제외)
-├── main.py           # 프로그램 실행 진입점
+├── main.py           # 프로그램 실행 진입점 ✅
 ├── requirements.txt  # 프로젝트 의존성 라이브러리 목록
 └── .gitignore        # Git 추적 제외 파일 설정
 ```
@@ -30,6 +34,7 @@ weather-collector/
 - **Python 3.x**
 - **requests** - 기상청 API 호출
 - **python-dotenv** - 환경변수 관리
+- **pytest** - 테스트 코드
 
 ---
 
@@ -44,9 +49,6 @@ weather-collector/
 | ta | 예상기온(°C) |
 | rnSt | 강수확률(%) |
 | wf | 날씨 |
-| wfCd | 날씨코드(하늘상태) |
-| wd1 | 풍향 |
-| rnYn | 강수형태 |
 
 ---
 
@@ -78,6 +80,16 @@ API_KEY=발급받은_API_키
 
 ---
 
+## 실행 방법
+
+```bash
+python main.py
+```
+
+실행 후 도시명 입력하면 `data/weather.csv` 에 날씨 데이터가 저장됩니다.
+
+---
+
 ## 지원 도시
 
 | 도시 | 지역코드 |
@@ -89,6 +101,28 @@ API_KEY=발급받은_API_키
 
 ---
 
+## 테스트 실행
+
+```bash
+pytest tests/ -v
+```
+
+---
+
+## 전체 파이프라인
+
+```
+사용자 입력 (도시명)
+    ↓
+fetch_weather()   → 기상청 API 호출
+    ↓
+parse_weather()   → 필요한 데이터만 추출
+    ↓
+save_weather()    → CSV 파일로 저장
+```
+
+---
+
 ## 진행 현황
 
 - [x] 프로젝트 구조 설계 (모듈화)
@@ -96,9 +130,10 @@ API_KEY=발급받은_API_키
 - [x] 환경변수(.env) 설정
 - [x] fetcher.py 구현 - 기상청 API 데이터 수집
 - [x] parser.py 구현 - API 응답 데이터 파싱
-- [ ] parser.py 테스트 코드 작성 (pytest)
-- [ ] saver.py 구현
-- [ ] main.py 연결
+- [x] parser.py 테스트 코드 작성 (pytest)
+- [x] saver.py 구현 - CSV 파일 저장
+- [x] main.py 구현 - 전체 파이프라인 연결
+- [ ] 빈 데이터 처리 (ta 값 없을 때)
 - [ ] DB 연동 (예정)
 - [ ] Docker 컨테이너화 (예정)
 - [ ] Airflow 파이프라인 (예정)
